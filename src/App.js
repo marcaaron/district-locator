@@ -4,16 +4,22 @@ import axios from 'axios';
 class App extends Component {
   state = {
     address: '',
-    district: ''
+    district: '',
+    error: ''
   }
 
   fetchDistrict = async (e) => {
     e.preventDefault();
     const url = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.REACT_APP_API_KEY}&address=${this.state.address}&includeOffices=true&roles=legislatorLowerBody`;
-    const result = await axios.get(url);
-    const officeName = result.data.offices[0].name.split(' ');
-    const district = officeName[officeName.length-1];
-    this.setState({district});
+    try {
+      const result = await axios.get(url);
+      const officeName = result.data.offices[0].name.split(' ');
+      const district = officeName[officeName.length-1];
+      console.log(result);
+      this.setState({district, error: ''});
+    } catch(error){
+      this.setState({district: '', error:'Unable to locate that address.'})
+    }
   }
 
   render() {
@@ -33,6 +39,10 @@ class App extends Component {
         {
           this.state.district &&
           <div className="district">Your district is: {this.state.district}</div>
+        }
+        {
+          this.state.error &&
+          <div className="error">{this.state.error}</div>
         }
       </div>
     );
