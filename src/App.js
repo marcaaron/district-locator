@@ -13,10 +13,12 @@ class App extends Component {
     const url = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.REACT_APP_API_KEY}&address=${this.state.address}&includeOffices=true&roles=legislatorLowerBody`;
     try {
       const result = await axios.get(url);
+      console.log(result);
       const officeName = result.data.offices[0].name.split(' ');
       const district = officeName[officeName.length-1];
       this.setState({district, error: ''});
     } catch(error){
+      console.log(error);
       this.setState({district: '', error:'Unable to locate that address.'})
     }
   }
