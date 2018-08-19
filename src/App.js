@@ -23,6 +23,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(process.env);
     return (
       <div className="App">
         <h1>District Locator</h1>
