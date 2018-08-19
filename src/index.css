@@ -1,0 +1,25 @@
+body{
+  text-align: center;
+}
+
+.App {
+  max-width:300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: solid 1px black;
+}
+
+form {
+    display:flex;
+    flex-direction:column;
+
+}
+
+form * {
+  padding: 10px;
+}
+
+.district {
+  padding: 20px;
+  color: blue;
+}
