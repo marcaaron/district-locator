@@ -15,7 +15,6 @@ class App extends Component {
       const result = await axios.get(url);
       const officeName = result.data.offices[0].name.split(' ');
       const district = officeName[officeName.length-1];
-      console.log(result);
       this.setState({district, error: ''});
     } catch(error){
       this.setState({district: '', error:'Unable to locate that address.'})
@@ -23,7 +22,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(process.env);
     return (
       <div className="App">
         <h1>District Locator</h1>
